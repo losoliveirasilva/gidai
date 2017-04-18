@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <algorithm>
 #include "Date.h"
 #include "Entry.h"
 
@@ -14,6 +15,7 @@ public:
     Agenda() = default;
     void pushEntry(Date date, Entry entry);
     std::vector<Entry> getEntries(Date date);
+    std::vector<Entry> getEntries(Date date_lower, Date date_upper);
 
 private:
     std::multimap<Date, Entry> entries;

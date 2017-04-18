@@ -34,6 +34,7 @@ public:
         return false;
 
     }
+
 };
 
 }  /* namespace agenda */
