@@ -11,6 +11,8 @@ class Entry
 public:
     Entry(std::string description):
         description{description} {}
+    Entry(const Entry&) = default;
+    Entry(Entry&&) = default;
     const std::string description;
 
 };
