@@ -14,12 +14,12 @@ bool compare(const std::pair<Date, Entry>& lhs, Date rhs){
         entries.emplace(date, entry);
     }
 
-    std::vector<Entry> Agenda::getEntries(Date date_lower, Date date_upper){
+    std::vector<std::pair<Date, Entry>> Agenda::getEntries(Date date_lower, Date date_upper){
         auto first = std::lower_bound(entries.begin(), entries.end(), date_lower, compare);
         auto last = std::lower_bound(first, entries.end(), date_upper, compare);
-        auto c = std::vector<Entry>{};
+        auto c = std::vector<std::pair<Date, Entry>>{};
         for (auto it = first; it != last; ++it) { 
-            c.push_back(it->second);
+            c.push_back(*it);
         }
         return c;
     }
