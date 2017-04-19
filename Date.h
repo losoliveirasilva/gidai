@@ -6,11 +6,15 @@ namespace agenda {
 class Date {
 
 public:
-    Date(unsigned short year, unsigned char month, unsigned char day):
-        year{year}, month{month}, day{day} {}
+    Date(unsigned short year, unsigned char month, unsigned char day,
+         unsigned char hour, unsigned char minute):
+                year{year}, month{month}, day{day}, hour{hour}, minute{minute} {}
+
     const unsigned short year;
     const unsigned char month;
     const unsigned char day;
+    const unsigned char hour;
+    const unsigned char minute;
 
     bool operator<(const agenda::Date& rhs) const {
         if (year < rhs.year){
@@ -28,6 +32,18 @@ public:
         if (day < rhs.day){
             return true;
         } else if (day > rhs.day){
+            return false;
+        }
+
+        if (hour < rhs.hour){
+            return true;
+        } else if (hour > rhs.hour){
+            return false;
+        }
+
+        if (minute < rhs.minute){
+            return true;
+        } else if (minute > rhs.minute){
             return false;
         }
 

@@ -7,15 +7,14 @@
 int main(int argc, char **argv)
 {
     auto a = agenda::Agenda{};
-    auto date1 = agenda::Date(2017, 4, 18);
-    auto date2 = agenda::Date(2017, 4, 20);
-    auto entry1 = agenda::Entry("teste0");
-    auto entry2 = agenda::Entry("teste1");
-    a.pushEntry(date1, entry1);
-    a.pushEntry(date2, entry2);
-    std::cout << a.getEntries({2017, 4, 18})[0].description << std::endl;
-    std::cout << a.getEntries({2017, 4, 18},{2017, 4, 18})[0].description << std::endl;
-    std::cout << a.getEntries({2017, 4, 18},{2017, 4, 18})[1].description << std::endl;
+    a.pushEntry(agenda::Date(2017, 4, 10, 10, 5), agenda::Entry("teste0"));
+    a.pushEntry(agenda::Date(2017, 6, 8, 18, 30), agenda::Entry("teste1"));
+    a.pushEntry(agenda::Date(2017, 4, 15, 8, 20), agenda::Entry("teste2"));
+
+    for(auto v: a.getEntries({2017, 3, 18, 0, 0}, {2018, 6, 8, 0, 0})){
+        std::cout << v.description << std::endl;
+    }
+
     return 0;
 }
 
