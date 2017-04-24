@@ -4,9 +4,9 @@
 #include <map>
 #include <vector>
 #include <algorithm>
-#include "Date.h"
-#include "Entry.h"
-#include "Modifier.h"
+#include "date.h"
+#include "entry.h"
+#include "modifier.h"
 
 namespace agenda {
 

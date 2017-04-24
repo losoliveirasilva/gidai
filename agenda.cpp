@@ -1,4 +1,4 @@
-#include "Agenda.h"
+#include "agenda.h"
 
 namespace agenda {
 

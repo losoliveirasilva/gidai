@@ -1,26 +1,26 @@
-# gidai (議題) - A minimalistic agenda written in C++
+# gidai (議題) - Agenda minimalista escrita em C++
 
 <p align="center">
-  <img src="assets/logo.png"/>
+  <img src="../logo.png"/>
 </p>
 Sign graphic by <a href="http://www.flaticon.com/authors/freepik">Freepik</a> from <a href="http://www.flaticon.com/">Flaticon</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>. Made with <a href="http://logomakr.com" title="Logo Maker">Logo Maker</a>
 
- Also in&nbsp;
-> <a href="assets/pt_BR/README.md">🇺🇸</a>
+Also in&nbsp;
+> <a href="../../README.md">🇺🇸</a>
 
-## Install
+## Instalação
 
 ```
 $ make
 ```
 
-## Usage
+## Uso
 
 ```
 $ ./gidai
 ```
 
-## Features
+## Funcionalidades
 
-- Add entry
-- Show entries
+- Adicionar compromisso
+- Mostrar compromissos

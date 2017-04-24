@@ -5,7 +5,7 @@
 #include <sstream>
 #include <ctime>
 #include <vector>
-#include "Agenda.h"
+#include "agenda.h"
 
 enum Menu
 {
