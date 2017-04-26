@@ -1,12 +1,12 @@
 # gidai (議題) - Agenda minimalista escrita em C++
 
-<img src="assets/logo.png" align="left" height="150"/>
+<img src="../logo.png" align="left" height="150"/>
 <img align="left" width="0" height="150px" hspace="10"/>
 
 gidai fornece uma maneira fácil de salvar e visualizar seus compromissos usando interface de usuário baseada em texto ou linha de comandos.
 
 > Also in&nbsp;
-> <a href="assets/pt_BR/README.md">🇧🇷</a>
+> <a href="../../README.md">🇺🇸</a>
 
 <br>
 
