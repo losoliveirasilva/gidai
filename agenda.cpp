@@ -10,8 +10,8 @@ bool compare(const std::pair<Date, Entry>& lhs, Date rhs){
 
 }
 
-    Agenda::Agenda(Color::Modifier fg_color):
-        fg_color{fg_color}
+    Agenda::Agenda(std::string name, Color::Modifier fg_color):
+        name{name}, fg_color{fg_color}
     {}
 
     void Agenda::pushEntry(Date date, Entry entry){

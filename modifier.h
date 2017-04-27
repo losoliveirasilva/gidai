@@ -1,3 +1,6 @@
+#ifndef MODIFIER_H
+#define MODIFIER_H
+
 #include <ostream>
 namespace Color {
     enum Code {
@@ -20,3 +23,5 @@ namespace Color {
         }
     };
 }
+
+#endif

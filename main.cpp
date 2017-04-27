@@ -5,7 +5,8 @@
 #include <sstream>
 #include <ctime>
 #include <vector>
-#include "agenda.h"
+#include "tui.h"
+#include "agendalist.h"
 
 enum Menu
 {
@@ -18,23 +19,17 @@ enum Menu
     MENU_NUM
 };
 
-int main(int argc, char **argv)
+int main(/*int argc, char **argv*/)
 {
     Color::Modifier fg_red(Color::FG_RED);
     Color::Modifier fg_blue(Color::FG_BLUE);
     Color::Modifier fg_def(Color::FG_DEFAULT);
-    auto a = agenda::Agenda(fg_blue);
+    auto al = agenda::AgendaList();
+    al.addAgenda(agenda::Agenda("Pessoal", fg_red));
+    al.addAgenda(agenda::Agenda("Aula", fg_blue));
     unsigned short line = 1;
-    unsigned short year_;
-    unsigned short month_;
-    unsigned short day_;
-    unsigned short hour_;
-    unsigned short minute_;
-    std::string description_;
     std::stringstream todaydate;
     std::stringstream todaymonth;
-
-    char slash_dummy;
 
     time_t t = time(0);   // get time now
     struct tm * now = localtime( & t );
@@ -44,93 +39,51 @@ int main(int argc, char **argv)
     todaymonth << std::setfill('0') << std::setw(2) << (now->tm_mon + 1) << '/'
                << (now->tm_year + 1900);
 
-    a.pushEntry(agenda::Date(2017, 4, 20, 10, 5), agenda::Entry("teste0"));
-    a.pushEntry(agenda::Date(2017, 4, 21, 10, 5), agenda::Entry("teste1"));
-    a.pushEntry(agenda::Date(2017, 4, 22, 10, 5), agenda::Entry("teste2"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 4, 27, 10, 5), agenda::Entry("teste0"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 4, 27, 12, 5), agenda::Entry("teste2"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 4, 27, 14, 5), agenda::Entry("teste4"));
+
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 4, 27, 11, 5), agenda::Entry("teste1"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 4, 27, 13, 5), agenda::Entry("teste3"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 4, 28, 15, 5), agenda::Entry("teste5"));
+
+    agenda::Date dateAux = agenda::Date(0,0,0,0,0);
+    std::string stringAux;
+    auto tui = agenda::Tui();
+    tui.showHeader();
 
     while (line != EXIT){
-        std::cout << "gidai v0.1 Alpha\n\n"
-                  << "0 - Sair\n"
-                  << "1 - Adicionar compromisso\n"
-                  << "2 - Ver os compromissos de hoje\n"
-                  << "3 - Ver os compromissos desse mês\n"
-                  << "4 - Ver os compromissos de um dia específico\n"
-                  << "5 - Ver os compromissos de um mês específico\n"
-                  << "\n> ";
-
-        std::cin >> line;
-        std::cin.ignore();
+        line = (unsigned short)tui.showMenu();
 
         switch(line){
         case EXIT:
-            std::cout << "\n\nAté logo!! :)\n" << std::endl;
+            tui.showGoodbye();
             break;
         case ADD_ENTRY:
-            std::cout << "Hora (HH:MM): ";
-            std::cin >> hour_ >> slash_dummy >> minute_;
-            std::cout << "Data (dd/mm/aaaa): ";
-            std::cin >> day_ >> slash_dummy >> month_ >> slash_dummy >> year_;
-            std::cin.ignore();
-            std::cout << "Description: ";
-            std::getline(std::cin, description_);
-            a.pushEntry(agenda::Date(year_, month_, day_, hour_, minute_), agenda::Entry(description_));
+            al.agendas.at(0).pushEntry(tui.getTimeDate(), agenda::Entry(tui.getText("T Descrição: ")));
             break;
 
         case VIEW_TODAY_ENTRIES:
             std::cout << "\nComprimissos do dia " << todaydate.str() << "\n";
-            std::cout << a.fg_color;
-            for(auto v: a.getEntries({(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)now->tm_mday, 0, 0}, {(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)(now->tm_mday+1), 0, 0})){
-                std::cout << std::setfill('0') << std::setw(2) << (int)v.first.hour << ":" 
-                          << std::setfill('0') << std::setw(2) << (int)v.first.minute << " - "
-                          << v.second.description
-                << std::endl;
-            }
-            std::cout << fg_def;
+            tui.printEntriesVector(al.getEntries({(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)now->tm_mday, 0, 0}, {(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)(now->tm_mday+1), 0, 0}));
             break;
 
         case VIEW_MONTH_ENTRIES:
             std::cout << "\nComprimissos do mês " << todaymonth.str() << "\n";
-            std::cout << a.fg_color;
-            for(auto v: a.getEntries({(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)1, 0, 0}, {(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)32, 0, 0})){
-                std::cout << std::setfill('0') << std::setw(2) << (int)v.first.hour << ":" 
-                          << std::setfill('0') << std::setw(2) << (int)v.first.minute << " "
-                          << std::setfill('0') << std::setw(2) << (int)v.first.day << "/"
-                          << std::setfill('0') << std::setw(2) << (int)v.first.month << "/"
-                          << std::setfill('0') << std::setw(2) << (int)v.first.year << " - "
-                          << v.second.description
-                << std::endl;
-            }
-            std::cout << fg_def;
+            tui.printEntriesVector(al.getEntries({(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)1, 0, 0}, {(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)32, 0, 0}));
             break;
 
             break;
         case VIEW_SPECIFIC_DAY:
-            std::cout << "Data (dd/mm/aaaa): ";
-            std::cin >> day_ >> slash_dummy >> month_ >> slash_dummy >> year_;
-            for(auto v: a.getEntries({year_, (unsigned char)month_, (unsigned char)day_, 0, 0}, {year_, (unsigned char)month_, (unsigned char)(day_+1), 0, 0})){
-                std::cout << std::setfill('0') << std::setw(2) << (int)v.first.hour << ":" 
-                          << std::setfill('0') << std::setw(2) << (int)v.first.minute << " "
-                          << std::setfill('0') << std::setw(2) << (int)v.first.day << "/"
-                          << std::setfill('0') << std::setw(2) << (int)v.first.month << "/"
-                          << std::setfill('0') << std::setw(2) << (int)v.first.year << " - "
-                          << v.second.description
-                << std::endl;
-            }
+            dateAux = tui.getDate();
+
+            //tui.printEntriesVector(al.agendas.at(0).getEntries({dateAux.year, dateAux.month, dateAux.day, 0, 0}, {dateAux.year, dateAux.month, (unsigned char)(dateAux.day+1), 0, 0}));
             break;
 
         case VIEW_SPECIFIC_MONTH:
-            std::cout << "Data (mm/aaaa): ";
-            std::cin >> month_ >> slash_dummy >> year_;
+            dateAux = tui.getMonth();
 
-            for(auto v: a.getEntries({year_, (unsigned char)month_, (unsigned char)1, 0, 0}, {year_, (unsigned char)month_, (unsigned char)32, 0, 0})){
-                std::cout << std::setfill('0') << std::setw(2) << (int)v.first.hour << ":" 
-                          << std::setfill('0') << std::setw(2) << (int)v.first.minute << " "
-                          << std::setfill('0') << std::setw(2) << (int)v.first.day << "/"
-                          << std::setfill('0') << std::setw(2) << (int)v.first.month << "/"
-                          << std::setfill('0') << std::setw(2) << (int)v.first.year << " - "
-                          << v.second.description
-                << std::endl;
-            }
+            //tui.printEntriesVector(a.getEntries({dateAux.year, dateAux.month, 1, 0, 0}, {dateAux.year, dateAux.month, 32, 0, 0}));
             break;
 
         default:

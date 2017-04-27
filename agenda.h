@@ -14,9 +14,10 @@ class Agenda {
 
 public:
     Agenda() = default;
-    Agenda(Color::Modifier fg_color);
+    Agenda(std::string name, Color::Modifier fg_color);
     void pushEntry(Date date, Entry entry);
     std::vector<std::pair<Date, Entry>> getEntries(Date date_lower, Date date_upper);
+    std::string name;
     Color::Modifier fg_color;
 
 private:

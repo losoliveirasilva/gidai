@@ -10,11 +10,11 @@ public:
          unsigned char hour, unsigned char minute):
                 year{year}, month{month}, day{day}, hour{hour}, minute{minute} {}
 
-    const unsigned short year;
-    const unsigned char month;
-    const unsigned char day;
-    const unsigned char hour;
-    const unsigned char minute;
+    unsigned short year;
+    unsigned char month;
+    unsigned char day;
+    unsigned char hour;
+    unsigned char minute;
 
     bool operator<(const agenda::Date& rhs) const {
         if (year < rhs.year){
