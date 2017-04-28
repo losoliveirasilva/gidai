@@ -29,10 +29,6 @@ namespace agenda {
         return line;
     }
 
-    void Tui::showGoodbye(){
-        std::cout << "Até logo! \n\n";
-    }
-
     agenda::Date Tui::getTimeDate(){
         unsigned short year_;
         unsigned short month_;
@@ -95,6 +91,10 @@ namespace agenda {
             << std::endl;
         }
         std::cout << fg_def;
+        std::cout << "\nPressione qualquer tecla para continuar";
+        fflush(stdout);
+        system("read -n 1");
+        std::cout << std::endl;
     }
 
 } /* namespace agenda */

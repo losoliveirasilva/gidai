@@ -17,7 +17,6 @@ public:
     Tui() = default;
     void showHeader();
     int showMenu();
-    void showGoodbye();
     agenda::Date getTimeDate();
     agenda::Date getDate();
     agenda::Date getMonth();

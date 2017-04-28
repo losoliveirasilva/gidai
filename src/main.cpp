@@ -57,7 +57,7 @@ int main(/*int argc, char **argv*/)
 
         switch(line){
         case EXIT:
-            tui.showGoodbye();
+            //tui.showGoodbye();
             break;
         case ADD_ENTRY:
             al.agendas.at(0).pushEntry(tui.getTimeDate(), agenda::Entry(tui.getText("T Descrição: ")));
