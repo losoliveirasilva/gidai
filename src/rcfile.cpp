@@ -28,10 +28,10 @@ namespace agenda {
 
     void RCFile::storeLine(std::string key, std::string value){
         if(key.compare("useStrikethrough") == 0){
-            useStrikethrough = (key.compare("false")) ? false : true;
+            useStrikethrough = (value.compare("false") == 0) ? false : true;
         } else if(key.compare("useColor") == 0){
-            useColor = (key.compare("false")) ? false : true;
-        } else if(key.compare("language") == 0){
+            useColor = (value.compare("false") == 0) ? false : true;
+        } else if(value.compare("language") == 0){
             language = value;
         }
     }
