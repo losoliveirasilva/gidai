@@ -10,6 +10,7 @@ enum Menu
 {
     EXIT,
     ADD_ENTRY,
+    CREATE_AGENDA,
     VIEW_TODAY_ENTRIES,
     VIEW_MONTH_ENTRIES,
     VIEW_SPECIFIC_DAY,
@@ -26,6 +27,8 @@ class Features {
                 return "Sair";
             case ADD_ENTRY:
                 return "Adicionar compromisso";
+            case CREATE_AGENDA:
+                return "Criar agenda";
             case VIEW_TODAY_ENTRIES:
                 return "Ver os compromissos de hoje";
             case VIEW_MONTH_ENTRIES:

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd src/
+nvim -p main.cpp \
+	agenda.h agenda.cpp \
+	agendalist.h agendalist.cpp \
+	tui.h tui.cpp \
+	entry.h \
+	date.h \
+	features.h \
+	modifier.h \
+	rcfile.h rcfile.cpp

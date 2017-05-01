@@ -2,6 +2,10 @@
 
 namespace agenda {
 
+    Tui::Tui(bool rcColor, bool rcStrikethrough):
+        rcColor{rcColor}, rcStrikethrough{rcStrikethrough}
+    {}
+
     void Tui::showHeader(){
         std::cout << "gidai v0.1 Alpha\n\n";
     }
@@ -81,7 +85,8 @@ namespace agenda {
     void Tui::printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector){
         Color::Modifier fg_def(Color::FG_DEFAULT);
         for(auto v: vector){
-            std::cout << std::get<2>(v);
+            if(rcColor)
+                std::cout << std::get<2>(v);
             std::cout << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).hour << ":" 
                       << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).minute << " "
                       << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).day << "/"
@@ -95,6 +100,24 @@ namespace agenda {
         fflush(stdout);
         system("read -n 1");
         std::cout << std::endl;
+    }
+
+    void Tui::printAgendaList(std::vector<Agenda> agendas){
+        Color::Modifier fg_def(Color::FG_DEFAULT);
+        int i = 0;
+        if(!agendas.empty()){
+            std::cout << std::endl << "Agendas:" << std::endl;
+            for(auto v: agendas){
+                std::cout << v.fg_color;
+                std::cout << i++ << " - ";
+                std::cout << v.name << std::endl;
+            }
+        } else{
+            std::cout << "Sem agendas" << std::endl;
+        }
+        std::cout << fg_def;
+        std::cout << std::endl;
+
     }
 
 } /* namespace agenda */

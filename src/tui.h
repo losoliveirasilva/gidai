@@ -8,13 +8,14 @@
 #include <iomanip>
 #include "entry.h"
 #include "modifier.h"
+#include "agenda.h"
 
 namespace agenda {
 
 class Tui {
 
 public:
-    Tui() = default;
+    Tui(bool rcColor, bool rcStrikethrough);
     void showHeader();
     int showMenu();
     agenda::Date getTimeDate();
@@ -22,9 +23,13 @@ public:
     agenda::Date getMonth();
     std::string getText(std::string s);
     void printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector);
+    void printAgendaList(std::vector<Agenda> agendas);
 
 
 private:
+
+    bool rcColor;
+    bool rcStrikethrough;
 
 };
 
