@@ -1,4 +1,8 @@
-# gidairc - runtime configuration file
+# gidairc
+Runtime configuration file
+
+> Also in&nbsp;
+> <a href="docs/pt_BR/GIDAIRC.md">🇧🇷</a>
 
 ## Usage
 
