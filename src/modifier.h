@@ -4,6 +4,8 @@
 #include <ostream>
 namespace Color {
     enum Code {
+        STRIKE      = 9,
+        RES_STRIKE  = 29,
         FG_RED      = 31,
         FG_GREEN    = 32,
         FG_BLUE     = 34,

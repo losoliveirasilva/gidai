@@ -9,6 +9,7 @@
 #include "entry.h"
 #include "modifier.h"
 #include "agenda.h"
+#include <ctime>
 
 namespace agenda {
 
@@ -22,6 +23,7 @@ public:
     agenda::Date getDate();
     agenda::Date getMonth();
     std::string getText(std::string s);
+    int getInt(std::string s);
     void printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector);
     void printAgendaList(std::vector<Agenda> agendas);
 

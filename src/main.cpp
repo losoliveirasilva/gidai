@@ -21,6 +21,7 @@ int main(/*int argc, char **argv*/)
     unsigned short line = 1;
     std::stringstream todaydate;
     std::stringstream todaymonth;
+    int auxInt = 0;
 
     agenda::RCFile rcfile(".gidairc");
 
@@ -32,13 +33,13 @@ int main(/*int argc, char **argv*/)
     todaymonth << std::setfill('0') << std::setw(2) << (now->tm_mon + 1) << '/'
                << (now->tm_year + 1900);
 
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 4, 27, 10, 5), agenda::Entry("teste0"));
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 4, 27, 12, 5), agenda::Entry("teste2"));
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 4, 27, 14, 5), agenda::Entry("teste4"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 1, 10, 5), agenda::Entry("teste0"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 1, 13, 5), agenda::Entry("teste2"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 2, 15, 5), agenda::Entry("teste4"));
 
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 4, 27, 11, 5), agenda::Entry("teste1"));
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 4, 27, 13, 5), agenda::Entry("teste3"));
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 4, 28, 15, 5), agenda::Entry("teste5"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 1, 11, 5), agenda::Entry("teste1"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 1, 14, 5), agenda::Entry("teste3"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 2, 15, 5), agenda::Entry("teste5"));
 
     agenda::Date dateAux = agenda::Date(0,0,0,0,0);
     std::string stringAux;
@@ -53,7 +54,12 @@ int main(/*int argc, char **argv*/)
             break;
         case agenda::ADD_ENTRY:
             tui.printAgendaList(al.agendas);
-            al.agendas.at(0).pushEntry(tui.getTimeDate(), agenda::Entry(tui.getText("Descrição: ")));
+            auxInt = tui.getInt("Número da agenda: ");
+            if(auxInt >= (int)al.agendas.size()){
+                std::cout << "Agenda inválida\n";
+            } else{
+                al.agendas.at(auxInt).pushEntry(tui.getTimeDate(), agenda::Entry(tui.getText("Descrição: ")));
+            }
             break;
 
         case agenda::CREATE_AGENDA:

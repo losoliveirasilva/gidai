@@ -82,11 +82,35 @@ namespace agenda {
         return description_;
     }
 
+    int Tui::getInt(std::string s){
+        int i;
+        std::cout << s;
+        std::cin >> i;
+        std::cin.ignore();
+
+        return i;
+    }
+
     void Tui::printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector){
+        time_t t = time(0);   // get time now
+        struct tm * now = localtime( & t );
+        agenda::Date today(now->tm_year+1900, now->tm_mon+1, now->tm_mday, (unsigned char)now->tm_hour, (unsigned char)now->tm_min);
         Color::Modifier fg_def(Color::FG_DEFAULT);
+        Color::Modifier strike(Color::STRIKE);
+        Color::Modifier res_strike(Color::RES_STRIKE);
+        std::cout << (int)today.hour << ":" << (int)today.minute << std::endl;
+        std::cout << now->tm_hour << ":" << now->tm_min << std::endl;
         for(auto v: vector){
             if(rcColor)
                 std::cout << std::get<2>(v);
+        
+            if(rcStrikethrough){
+                if(std::get<0>(v) < today){
+                    std::cout << strike;
+                } else{
+                    std::cout << res_strike;
+                }
+            }
             std::cout << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).hour << ":" 
                       << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).minute << " "
                       << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).day << "/"
@@ -96,6 +120,7 @@ namespace agenda {
             << std::endl;
         }
         std::cout << fg_def;
+        std::cout << res_strike;
         std::cout << "\nPressione qualquer tecla para continuar";
         fflush(stdout);
         system("read -n 1");
