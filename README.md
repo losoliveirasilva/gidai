@@ -24,7 +24,10 @@ $ make
 $ ./gidai
 ```
 
+You can configure your gidai using a runtime configuration file called [gidairc](GIDAIRC.md).
+
 ## Features
 
 - Add entry
 - Show entries
+- Add agenda
