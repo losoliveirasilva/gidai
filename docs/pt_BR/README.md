@@ -24,7 +24,10 @@ $ make
 $ ./gidai
 ```
 
+Você pode configurar seu gidai usando um arquivo de configuraço em tempo de execução chamado [gidairc](GIDAIRC.md).
+
 ## Funcionalidades
 
 - Adicionar compromisso
 - Mostrar compromissos
+- Adicionar agenda
