@@ -2,7 +2,7 @@
 Arquivo de configuração em tempo de execução
 
 > Also in&nbsp;
-> <a href="../../GIDAIRC.md">🇧🇷</a>
+> <a href="../../GIDAIRC.md">🇺🇸</a>
 
 ## Uso
 
