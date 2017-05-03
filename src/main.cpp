@@ -33,13 +33,15 @@ int main(/*int argc, char **argv*/)
     todaymonth << std::setfill('0') << std::setw(2) << (now->tm_mon + 1) << '/'
                << (now->tm_year + 1900);
 
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 1, 10, 5), agenda::Entry("teste0"));
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 1, 13, 5), agenda::Entry("teste2"));
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 2, 15, 5), agenda::Entry("teste4"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 2, 10, 5), agenda::Entry("Dentista"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 3, 13, 5), agenda::Entry("Oftalmo"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 4, 15, 5), agenda::Entry("Dermato"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 6, 27, 20, 30), agenda::Entry("Viagem para Lages"));
 
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 1, 11, 5), agenda::Entry("teste1"));
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 1, 14, 5), agenda::Entry("teste3"));
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 2, 15, 5), agenda::Entry("teste5"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 2, 11, 5), agenda::Entry("Prova I - Redes I"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 3, 14, 5), agenda::Entry("Trabalho prático II - Redes I"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 4, 15, 5), agenda::Entry("Prova II - Cálculo B"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 6, 10, 10, 10), agenda::Entry("Prova III - Cálculo B"));
 
     agenda::Date dateAux = agenda::Date(0,0,0,0,0);
     std::string stringAux;
@@ -53,7 +55,7 @@ int main(/*int argc, char **argv*/)
         case agenda::EXIT:
             break;
         case agenda::ADD_ENTRY:
-            tui.printAgendaList(al.agendas);
+            tui.printAgendaList(al.agendas, true);
             auxInt = tui.getInt("Número da agenda: ");
             if(auxInt >= (int)al.agendas.size()){
                 std::cout << "Agenda inválida\n";
@@ -63,30 +65,31 @@ int main(/*int argc, char **argv*/)
             break;
 
         case agenda::CREATE_AGENDA:
-            al.addAgenda(agenda::Agenda(tui.getText("\nNome da agenda: "), fg_red));
+            al.addAgenda(agenda::Agenda(tui.getText("Nome da agenda: "), tui.getColor()));
             break;
 
         case agenda::VIEW_TODAY_ENTRIES:
-            std::cout << "\nComprimissos do dia " << todaydate.str() << "\n";
+            tui.printAgendaList(al.agendas, false);
+            std::cout << "Comprimissos do dia " << todaydate.str() << "\n";
             tui.printEntriesVector(al.getEntries({(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)now->tm_mday, 0, 0}, {(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)(now->tm_mday+1), 0, 0}));
             break;
 
         case agenda::VIEW_MONTH_ENTRIES:
-            std::cout << "\nComprimissos do mês " << todaymonth.str() << "\n";
+            tui.printAgendaList(al.agendas, false);
+            std::cout << "Comprimissos do mês " << todaymonth.str() << "\n";
             tui.printEntriesVector(al.getEntries({(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)1, 0, 0}, {(unsigned short)(now->tm_year + 1900), (unsigned char)(now->tm_mon+1), (unsigned char)32, 0, 0}));
             break;
 
-            break;
         case agenda::VIEW_SPECIFIC_DAY:
+            tui.printAgendaList(al.agendas, false);
             dateAux = tui.getDate();
-
-            //tui.printEntriesVector(al.agendas.at(0).getEntries({dateAux.year, dateAux.month, dateAux.day, 0, 0}, {dateAux.year, dateAux.month, (unsigned char)(dateAux.day+1), 0, 0}));
+            tui.printEntriesVector(al.getEntries(dateAux, {dateAux.year, dateAux.month, (unsigned char)(dateAux.day+1), 0,0}));
             break;
 
         case agenda::VIEW_SPECIFIC_MONTH:
+            tui.printAgendaList(al.agendas, false);
             dateAux = tui.getMonth();
-
-            //tui.printEntriesVector(a.getEntries({dateAux.year, dateAux.month, 1, 0, 0}, {dateAux.year, dateAux.month, 32, 0, 0}));
+            tui.printEntriesVector(al.getEntries({dateAux.year, dateAux.month, 1, 0, 0}, {dateAux.year, dateAux.month, 32, 0,0}));
             break;
 
         default:

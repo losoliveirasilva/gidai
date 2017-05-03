@@ -98,8 +98,6 @@ namespace agenda {
         Color::Modifier fg_def(Color::FG_DEFAULT);
         Color::Modifier strike(Color::STRIKE);
         Color::Modifier res_strike(Color::RES_STRIKE);
-        std::cout << (int)today.hour << ":" << (int)today.minute << std::endl;
-        std::cout << now->tm_hour << ":" << now->tm_min << std::endl;
         for(auto v: vector){
             if(rcColor)
                 std::cout << std::get<2>(v);
@@ -127,14 +125,15 @@ namespace agenda {
         std::cout << std::endl;
     }
 
-    void Tui::printAgendaList(std::vector<Agenda> agendas){
+    void Tui::printAgendaList(std::vector<Agenda> agendas, bool showNum){
         Color::Modifier fg_def(Color::FG_DEFAULT);
         int i = 0;
         if(!agendas.empty()){
             std::cout << std::endl << "Agendas:" << std::endl;
             for(auto v: agendas){
                 std::cout << v.fg_color;
-                std::cout << i++ << " - ";
+                if(showNum)
+                    std::cout << i++ << " - ";
                 std::cout << v.name << std::endl;
             }
         } else{
@@ -143,6 +142,74 @@ namespace agenda {
         std::cout << fg_def;
         std::cout << std::endl;
 
+    }
+
+    Color::Modifier Tui::getColor(){
+        int color;
+        Color::Modifier fg_def(Color::FG_DEFAULT);
+        Color::Modifier fg_red(Color::FG_RED);
+        Color::Modifier fg_green(Color::FG_GREEN);
+        Color::Modifier fg_yellow(Color::FG_YELLOW);
+        Color::Modifier fg_blue(Color::FG_BLUE);
+        Color::Modifier fg_magenta(Color::FG_MAGENTA);
+        Color::Modifier fg_cyan(Color::FG_CYAN);
+        Color::Modifier fg_lgray(Color::FG_LGRAY);
+        Color::Modifier fg_dgray(Color::FG_DGRAY);
+        Color::Modifier fg_lred(Color::FG_LRED);
+        Color::Modifier fg_lgreen(Color::FG_LGREEN);
+        Color::Modifier fg_lyellow(Color::FG_LYELLOW);
+        Color::Modifier fg_lblue(Color::FG_LBLUE);
+        Color::Modifier fg_lmagenta(Color::FG_LMAGENTA);
+        Color::Modifier fg_lcyan(Color::FG_LCYAN);
+        Color::Modifier fg_white(Color::FG_WHITE);
+
+        std::cout << std::endl;
+        std::cout << fg_red     << "00" << "\t" << fg_green     << "01" << "\t" << fg_yellow << "02" << "\n"
+                  << fg_blue    << "03" << "\t" << fg_magenta   << "04" << "\t" << fg_cyan   << "05" << "\n"
+                  << fg_lgray   << "06" << "\t" << fg_dgray     << "07" << "\t" << fg_lred   << "08" << "\n"
+                  << fg_lgreen  << "09" << "\t" << fg_lyellow   << "10" << "\t" << fg_lblue  << "11" << "\n"
+                  << fg_lmagenta<< "12" << "\t" << fg_lcyan     << "13" << "\t" << fg_white  << "14" << "\n";
+
+
+        std::cout << fg_def;
+        std::cout << "\nCor da agenda (número correspondente): ";
+        std::cin >> color;
+        std::cin.ignore();
+
+        switch(color){
+        case 0:
+            return fg_red;
+        case 1:
+            return fg_green;
+        case 2:
+            return fg_yellow;
+        case 3:
+            return fg_blue;
+        case 4:
+            return fg_magenta;
+        case 5:
+            return fg_cyan;
+        case 6:
+            return fg_lgray;
+        case 7:
+            return fg_dgray;
+        case 8:
+            return fg_lred;
+        case 9:
+            return fg_lgreen;
+        case 10:
+            return fg_lyellow;
+        case 11:
+            return fg_lblue;
+        case 12:
+            return fg_lmagenta;
+        case 13:
+            return fg_lcyan;
+        case 14:
+            return fg_white;
+        default:
+            return fg_white;
+        }
     }
 
 } /* namespace agenda */

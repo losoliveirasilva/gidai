@@ -25,7 +25,8 @@ public:
     std::string getText(std::string s);
     int getInt(std::string s);
     void printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector);
-    void printAgendaList(std::vector<Agenda> agendas);
+    void printAgendaList(std::vector<Agenda> agendas, bool showNum);
+    Color::Modifier getColor();
 
 
 private:

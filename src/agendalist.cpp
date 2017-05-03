@@ -17,5 +17,9 @@ namespace agenda {
         return c;
     }
 
+    /*bool operator<(const std::tuple<Date, Entry, Color::Modifier>& lhs, const std::tuple<Date, Entry, Color::Modifier>& rhs){
+        return std::get<0>(lhs) < std::get<0>(rhs);
+    }*/
+
 
 } /* namespace agenda */
