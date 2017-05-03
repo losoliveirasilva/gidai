@@ -13,7 +13,12 @@ public:
         description{description} {}
     Entry(const Entry&) = default;
     Entry(Entry&&) = default;
-    const std::string description;
+    std::string description;
+
+    Entry& operator=(const Entry& rhs) {
+        description = rhs.description;
+        return *this;
+    }
 
 };
 

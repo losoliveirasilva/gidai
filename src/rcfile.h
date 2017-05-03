@@ -15,6 +15,7 @@ public:
 
     bool useStrikethrough;
     bool useColor;
+    bool sortEntries;
     std::string language;
 
 private:

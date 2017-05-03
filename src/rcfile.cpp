@@ -9,6 +9,7 @@ namespace agenda {
 
         useStrikethrough = true;
         useColor = true;
+        sortEntries = true;
         language = "pt_BR";
 
         std::string line;
@@ -33,6 +34,8 @@ namespace agenda {
             useColor = (value.compare("false") == 0) ? false : true;
         } else if(value.compare("language") == 0){
             language = value;
+        } else if(key.compare("sortEntries") == 0){
+            sortEntries = (value.compare("false") == 0) ? false : true;
         }
     }
 

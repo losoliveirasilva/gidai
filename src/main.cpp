@@ -9,13 +9,16 @@
 #include "agendalist.h"
 #include "rcfile.h"
 #include "features.h"
+#include "financial.h"
 
 int main(/*int argc, char **argv*/)
 {
+    agenda::RCFile rcfile(".gidairc");
+
     Color::Modifier fg_red(Color::FG_RED);
     Color::Modifier fg_blue(Color::FG_BLUE);
     Color::Modifier fg_def(Color::FG_DEFAULT);
-    auto al = agenda::AgendaList();
+    auto al = agenda::AgendaList(rcfile.sortEntries);
     al.addAgenda(agenda::Agenda("Pessoal", fg_red));
     al.addAgenda(agenda::Agenda("Aula", fg_blue));
     unsigned short line = 1;
@@ -23,7 +26,12 @@ int main(/*int argc, char **argv*/)
     std::stringstream todaymonth;
     int auxInt = 0;
 
-    agenda::RCFile rcfile(".gidairc");
+    auto financial = agenda::Financial();
+    financial.pushEntry(agenda::Date(2017, 5, 3, 11, 0), 200);
+    financial.pushEntry(agenda::Date(2017, 5, 3, 10, 0), -100);
+    financial.pushEntry(agenda::Date(2017, 5, 3, 14, 0), -300);
+    financial.pushEntry(agenda::Date(2017, 5, 3, 6, 0), 500);
+
 
     time_t t = time(0);   // get time now
     struct tm * now = localtime( & t );
@@ -42,8 +50,9 @@ int main(/*int argc, char **argv*/)
     al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 3, 14, 5), agenda::Entry("Trabalho prático II - Redes I"));
     al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 4, 15, 5), agenda::Entry("Prova II - Cálculo B"));
     al.agendas.at(1).pushEntry(agenda::Date(2017, 6, 10, 10, 10), agenda::Entry("Prova III - Cálculo B"));
-
+        
     agenda::Date dateAux = agenda::Date(0,0,0,0,0);
+    agenda::Date dateAux2 = agenda::Date(0,0,0,0,0);
     std::string stringAux;
     auto tui = agenda::Tui(rcfile.useColor, rcfile.useStrikethrough);
     tui.showHeader();
@@ -92,6 +101,22 @@ int main(/*int argc, char **argv*/)
             tui.printEntriesVector(al.getEntries({dateAux.year, dateAux.month, 1, 0, 0}, {dateAux.year, dateAux.month, 32, 0,0}));
             break;
 
+        case agenda::ADD_DEBIT:
+            dateAux = tui.getTimeDate();
+            financial.pushEntry(dateAux, -(tui.getInt("Valor do débito: ")));
+            break;
+
+        case agenda::ADD_CREDIT:
+            dateAux = tui.getTimeDate();
+            financial.pushEntry(dateAux, tui.getInt("Valor do crédito: "));
+            break;
+
+        case agenda::VIEW_SPECIFIC_BALANCE:
+            dateAux = tui.getDate();
+            dateAux2 = tui.getDate();
+            tui.printFinancialVector(financial.getEntries(dateAux, {dateAux2.year, dateAux2.month, (unsigned char)(dateAux2.day+1), 0,0}));
+            break;
+            
         default:
             std::cout << "\n\nOpção inválida\n\n" << std::endl;
         }

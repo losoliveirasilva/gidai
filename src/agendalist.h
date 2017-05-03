@@ -9,11 +9,14 @@ namespace agenda {
 class AgendaList {
 
 public:
-    AgendaList() = default;
+    AgendaList(bool sortEntries);
     void addAgenda(Agenda agenda);
     std::vector<std::tuple<Date, Entry, Color::Modifier>> getEntries(Date date_lower, Date date_upper);
 
     std::vector<Agenda> agendas;
+
+private:
+    bool sortEntries;
 
 };
 

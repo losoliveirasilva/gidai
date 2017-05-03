@@ -15,6 +15,9 @@ enum Menu
     VIEW_MONTH_ENTRIES,
     VIEW_SPECIFIC_DAY,
     VIEW_SPECIFIC_MONTH,
+    ADD_CREDIT,
+    ADD_DEBIT,
+    VIEW_SPECIFIC_BALANCE,
     MENU_NUM
 };
 
@@ -37,6 +40,12 @@ class Features {
                 return "Ver os compromissos de um dia específico";
             case VIEW_SPECIFIC_MONTH:
                 return "Ver os compromissos de um mês específico";
+            case ADD_DEBIT:
+                return "Adicionar débito";
+            case ADD_CREDIT:
+                return "Adicionar crédito";
+            case VIEW_SPECIFIC_BALANCE:
+                return "Ver o balanço financeiro de um período de datas específicas";
             default:
                 return "ERROR";
         }

@@ -10,6 +10,7 @@
 #include "modifier.h"
 #include "agenda.h"
 #include <ctime>
+#include <cmath>
 
 namespace agenda {
 
@@ -27,7 +28,7 @@ public:
     void printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector);
     void printAgendaList(std::vector<Agenda> agendas, bool showNum);
     Color::Modifier getColor();
-
+    void printFinancialVector(std::vector<std::pair<Date, int>> vector);
 
 private:
 

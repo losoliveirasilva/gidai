@@ -15,19 +15,11 @@ namespace agenda {
         unsigned short line;
 
         for(int i = 0; i < MENU_NUM; ++i){
-            std::cout << i << " - " << menu.menuString(i) << std::endl;
+            std::cout << std::setfill(' ') << std::setw(((int)log10(MENU_NUM-1))+1) << i << " - " << menu.menuString(i) << std::endl;
         }
 
         std::cout << std::endl << "> ";
 
-        /*std::cout << "0 - Sair\n"
-                  << "1 - Adicionar compromisso\n"
-                  << "2 - Ver os compromissos de hoje\n"
-                  << "3 - Ver os compromissos desse mês\n"
-                  << "4 - Ver os compromissos de um dia específico\n"
-                  << "5 - Ver os compromissos de um mês específico\n"
-                  << "\n> ";*/
-        
         std::cin >> line;
         std::cin.ignore();
         return line;
@@ -210,6 +202,53 @@ namespace agenda {
         default:
             return fg_white;
         }
+    }
+
+    void Tui::printFinancialVector(std::vector<std::pair<Date, int>> vector){
+        Color::Modifier fg_def(Color::FG_DEFAULT);
+        Color::Modifier fg_red(Color::FG_RED);
+        Color::Modifier fg_green(Color::FG_GREEN);
+        int totalBalance = 0;
+
+        if(!vector.empty()){
+            std::cout << "\nGastos:\n";
+            for(auto v: vector) {
+                if(rcColor){
+                    if(v.second >= 0){
+                        std::cout << fg_green;
+                    } else{
+                        std::cout << fg_red;
+                    }
+                }
+
+                std::cout << std::setfill('0') << std::setw(2) << (int)v.first.hour << ":" 
+                          << std::setfill('0') << std::setw(2) << (int)v.first.minute << " "
+                          << std::setfill('0') << std::setw(2) << (int)v.first.day << "/"
+                          << std::setfill('0') << std::setw(2) << (int)v.first.month << "/"
+                          << std::setfill('0') << std::setw(2) << (int)v.first.year << "  "
+                          << v.second
+                << std::endl;
+                std::cout << fg_def;
+                totalBalance += v.second;
+            }
+
+            std::cout << "Balanço total deste período: ";
+            if(rcColor){
+                if(totalBalance >= 0){
+                    std::cout << fg_green;
+                } else{
+                    std::cout << fg_red;
+                }
+            }
+            std::cout << totalBalance << fg_def << std::endl;
+        } else{
+            std::cout << "Não houveram gastos neste período: ";
+        }
+
+        std::cout << "\nPressione qualquer tecla para continuar";
+        fflush(stdout);
+        system("read -n 1");
+        std::cout << std::endl;
     }
 
 } /* namespace agenda */
