@@ -12,11 +12,11 @@ Things you can configure in gidai are:
 - `useStrikethrough` - use of strikethrough font (depends on your terminal compatibility)
 - `language` - language used in user interface (not working yet)
 
-The file must be on the same path as the executable.
+This file must be on the same path as the executable.
 
 ## Exemple
 
-This is the default values. If gidai don't find a `.gidairc` file, or some value is not forced by this file, it will use the following values.
+This is the default values. If gidai don't find a `.gidairc` file, or some value is not set by this file, it will use the following values.
 ```
 language=pt_BR
 useColor=true
