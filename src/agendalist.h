@@ -11,7 +11,7 @@ class AgendaList {
 public:
     AgendaList(bool sortEntries);
     void addAgenda(Agenda agenda);
-    std::vector<std::tuple<Date, Entry, Color::Modifier>> getEntries(Date date_lower, Date date_upper);
+    std::vector<std::tuple<Date, std::string, Color::Modifier>> getEntries(Date date_lower, Date date_upper);
 
     std::vector<Agenda> agendas;
 

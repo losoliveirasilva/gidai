@@ -41,15 +41,15 @@ int main(/*int argc, char **argv*/)
     todaymonth << std::setfill('0') << std::setw(2) << (now->tm_mon + 1) << '/'
                << (now->tm_year + 1900);
 
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 2, 10, 5), agenda::Entry("Dentista"));
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 3, 13, 5), agenda::Entry("Oftalmo"));
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 4, 15, 5), agenda::Entry("Dermato"));
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 6, 27, 20, 30), agenda::Entry("Viagem para Lages"));
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 2, 10, 5), "Dentista");
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 3, 13, 5), "Oftalmo");
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 4, 15, 5), "Dermato");
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 6, 27, 20, 30), "Viagem para Lages");
 
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 2, 11, 5), agenda::Entry("Prova I - Redes I"));
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 3, 14, 5), agenda::Entry("Trabalho prático II - Redes I"));
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 4, 15, 5), agenda::Entry("Prova II - Cálculo B"));
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 6, 10, 10, 10), agenda::Entry("Prova III - Cálculo B"));
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 2, 11, 5), "Prova I - Redes I");
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 3, 14, 5), "Trabalho prático II - Redes I");
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 4, 15, 5), "Prova II - Cálculo B");
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 6, 10, 10, 10), "Prova III - Cálculo B");
         
     agenda::Date dateAux = agenda::Date(0,0,0,0,0);
     agenda::Date dateAux2 = agenda::Date(0,0,0,0,0);
@@ -69,7 +69,7 @@ int main(/*int argc, char **argv*/)
             if(auxInt >= (int)al.agendas.size()){
                 std::cout << "Agenda inválida\n";
             } else{
-                al.agendas.at(auxInt).pushEntry(tui.getTimeDate(), agenda::Entry(tui.getText("Descrição: ")));
+                al.agendas.at(auxInt).pushEntry(tui.getTimeDate(), tui.getText("Descrição: "));
             }
             break;
 

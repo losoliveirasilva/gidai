@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <iomanip>
-#include "entry.h"
 #include "modifier.h"
 #include "agenda.h"
 #include <ctime>
@@ -25,7 +24,7 @@ public:
     agenda::Date getMonth();
     std::string getText(std::string s);
     int getInt(std::string s);
-    void printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector);
+    void printEntriesVector(std::vector<std::tuple<Date, std::string, Color::Modifier>> vector);
     void printAgendaList(std::vector<Agenda> agendas, bool showNum);
     Color::Modifier getColor();
     void printFinancialVector(std::vector<std::pair<Date, int>> vector);

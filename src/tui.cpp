@@ -83,7 +83,7 @@ namespace agenda {
         return i;
     }
 
-    void Tui::printEntriesVector(std::vector<std::tuple<Date, Entry, Color::Modifier>> vector){
+    void Tui::printEntriesVector(std::vector<std::tuple<Date, std::string, Color::Modifier>> vector){
         time_t t = time(0);   // get time now
         struct tm * now = localtime( & t );
         agenda::Date today(now->tm_year+1900, now->tm_mon+1, now->tm_mday, (unsigned char)now->tm_hour, (unsigned char)now->tm_min);
@@ -106,7 +106,7 @@ namespace agenda {
                       << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).day << "/"
                       << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).month << "/"
                       << std::setfill('0') << std::setw(2) << (int)std::get<0>(v).year << " - "
-                      << std::get<1>(v).description
+                      << std::get<1>(v)
             << std::endl;
         }
         std::cout << fg_def;
