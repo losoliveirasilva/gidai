@@ -113,7 +113,7 @@ namespace agenda {
         std::cout << res_strike;
         std::cout << "\nPressione qualquer tecla para continuar";
         fflush(stdout);
-        system("read -n 1");
+        system("read -s -n 1");
         std::cout << std::endl;
     }
 
@@ -247,7 +247,7 @@ namespace agenda {
 
         std::cout << "\nPressione qualquer tecla para continuar";
         fflush(stdout);
-        system("read -n 1");
+        system("read -s -n 1");
         std::cout << std::endl;
     }
 
