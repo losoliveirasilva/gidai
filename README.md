@@ -1,4 +1,4 @@
-# gidai (議題) - A minimalistic agenda written in C++
+# gidai - A minimalistic agenda written in C++
 
 <img src="docs/logo.png" align="left" height="150"/>
 <img align="left" width="0" height="150px" hspace="10"/>
