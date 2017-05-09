@@ -1,7 +1,6 @@
 #ifndef FEATURES_H
 #define FEATURES_H
 
-#include <string>
 #include <iostream>
 
 namespace agenda {

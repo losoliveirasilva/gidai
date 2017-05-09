@@ -1,10 +1,3 @@
-#include <iostream>
-#include <iomanip>
-#include <numeric>
-#include <string>
-#include <sstream>
-#include <ctime>
-#include <vector>
 #include "tui.h"
 #include "agendalist.h"
 #include "rcfile.h"

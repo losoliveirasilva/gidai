@@ -3,12 +3,9 @@
 
 #include "features.h"
 #include "date.h"
-#include <string>
-#include <vector>
 #include <iomanip>
 #include "modifier.h"
 #include "agenda.h"
-#include <ctime>
 #include <cmath>
 
 namespace agenda {

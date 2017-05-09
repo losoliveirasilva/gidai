@@ -1,7 +1,6 @@
 #ifndef AGENDALIST_H
 #define AGENDALIST_H
 
-#include <vector>
 #include "agenda.h"
 
 namespace agenda {
