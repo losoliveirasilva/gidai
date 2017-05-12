@@ -34,14 +34,16 @@ int main(/*int argc, char **argv*/)
     todaymonth << std::setfill('0') << std::setw(2) << (now->tm_mon + 1) << '/'
                << (now->tm_year + 1900);
 
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 2, 10, 5), "Dentista");
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 3, 13, 5), "Oftalmo");
-    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 4, 15, 5), "Dermato");
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 8, 10, 5), "Dentista");
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 9, 13, 5), "Oftalmo");
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 12, 15, 30), "Dermato");
+    al.agendas.at(0).pushEntry(agenda::Date(2017, 5, 12, 18, 30), "Comprar pão");
     al.agendas.at(0).pushEntry(agenda::Date(2017, 6, 27, 20, 30), "Viagem para Lages");
 
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 2, 11, 5), "Prova I - Redes I");
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 3, 14, 5), "Trabalho prático II - Redes I");
-    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 4, 15, 5), "Prova II - Cálculo B");
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 7, 11, 5), "Prova I - Redes I");
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 9, 14, 5), "Trabalho prático II - Redes I");
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 12, 15, 5), "Prova II - Cálculo B");
+    al.agendas.at(1).pushEntry(agenda::Date(2017, 5, 12, 17, 5), "Trab");
     al.agendas.at(1).pushEntry(agenda::Date(2017, 6, 10, 10, 10), "Prova III - Cálculo B");
         
     agenda::Date dateAux = agenda::Date(0,0,0,0,0);
