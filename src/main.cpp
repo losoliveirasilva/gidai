@@ -3,6 +3,7 @@
 #include "rcfile.h"
 #include "features.h"
 #include "financial.h"
+#include "database.h"
 
 int main(/*int argc, char **argv*/)
 {
@@ -24,6 +25,12 @@ int main(/*int argc, char **argv*/)
     financial.pushEntry(agenda::Date(2017, 5, 3, 10, 0), -100);
     financial.pushEntry(agenda::Date(2017, 5, 3, 14, 0), -300);
     financial.pushEntry(agenda::Date(2017, 5, 3, 6, 0), 500);
+
+	auto db = agenda::Database();
+	// JA CRIADAS
+	//db.addAgenda(0, "Pessoal", Color::FG_RED);
+	//db.addAgenda(1, "Aula", Color::FG_BLUE);
+	//db.addEntry(agenda::Date(2017, 5, 3, 6, 0).dateString(), "TesteAula", "Aula");
 
 
     time_t t = time(0);   // get time now
@@ -60,16 +67,18 @@ int main(/*int argc, char **argv*/)
             break;
         case agenda::ADD_ENTRY:
             tui.printAgendaList(al.agendas, true);
-            auxInt = tui.getInt("Número da agenda: ");
-            if(auxInt >= (int)al.agendas.size()){
+            //auxInt = tui.getInt("Número da agenda: ");
+            /*if(auxInt >= (int)al.agendas.size()){
                 std::cout << "Agenda inválida\n";
             } else{
                 al.agendas.at(auxInt).pushEntry(tui.getTimeDate(), tui.getText("Descrição: "));
-            }
+            }*/
+			db.addEntry(tui.getTimeDate().dateString(), tui.getText("Descrição: "), tui.getText("Nome da agenda: "));
             break;
 
         case agenda::CREATE_AGENDA:
-            al.addAgenda(agenda::Agenda(tui.getText("Nome da agenda: "), tui.getColor()));
+			db.addAgenda(tui.getText("Nome da agenda: "), tui.getColor().code);
+            //al.addAgenda(agenda::Agenda(tui.getText("Nome da agenda: "), tui.getColor()));
             break;
 
         case agenda::VIEW_TODAY_ENTRIES:

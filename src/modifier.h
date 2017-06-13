@@ -24,13 +24,14 @@ namespace Color {
         FG_WHITE    = 97
     };
     class Modifier {
-        Code code;
     public:
         Modifier(Code pCode) : code(pCode) {}
         friend std::ostream&
         operator<<(std::ostream& os, const Modifier& mod) {
             return os << "\033[" << mod.code << "m";
         }
+
+        Code code;
     };
 }
 

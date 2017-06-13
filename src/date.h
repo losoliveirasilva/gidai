@@ -1,6 +1,9 @@
 #ifndef DATE_H
 #define DATE_H
 
+#include <sstream>
+#include <iomanip>
+
 namespace agenda {
 
 class Date {
@@ -50,6 +53,17 @@ public:
         return false;
 
     }
+
+	std::string dateString(){
+		std::stringstream ss;
+		ss 	<< (int)year << "-"
+			<< std::setfill('0') << std::setw(2) << (int)month 	<< "-"
+			<< std::setfill('0') << std::setw(2) << (int)day 	<< " "
+			<< std::setfill('0') << std::setw(2) << (int)hour 	<< ":"
+			<< std::setfill('0') << std::setw(2) << (int)minute << ":"
+			<< std::setfill('0') << std::setw(2) << 0;
+		return ss.str();
+	}
 
 };
 
